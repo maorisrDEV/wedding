@@ -1,7 +1,8 @@
 .center {
   text-align: center;
-  background: gainsboro;
   font-size: large;
+  background: gainsboro;
+  height: 100%;
 }
 
 .title {
