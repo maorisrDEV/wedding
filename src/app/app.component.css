@@ -23,3 +23,12 @@
 button {
   margin: 8px;
 }
+
+agm-map {
+  height: 200px;
+}
+
+img {
+  width: 100%;
+  max-height: 300px;
+}

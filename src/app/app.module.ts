@@ -7,6 +7,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
+import { HttpClientModule } from '@angular/common/http';
+import { AgmCoreModule } from '@agm/core';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +20,12 @@ import {MatButtonModule} from '@angular/material/button';
     BrowserAnimationsModule,
     MatIconModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    HttpClientModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDx5ptDggnpOmIe0KTtyBq9mUgPbhE2QJA',
+      libraries: ['places']
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

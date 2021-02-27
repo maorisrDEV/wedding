@@ -1,5 +1,5 @@
 <div class="center">
-  <img width="300" src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/wedding-quotes-1587481892.jpg">
+  <img src="https://i.ibb.co/dDQtBry/wedding-quotes-1587481892.jpg">
   <h2>!שלום פלוני אלמוני</h2>
   <h3>
     לירז כהן ומאור ישראל נרגשים להזמינכם לחגוג את יום שמחתם
@@ -18,12 +18,14 @@
 
   - כמה אורחים מגיעים -
   <div>
-    <button mat-raised-button color="accent">
+    <button (click)="handleRemoveGuest()" mat-raised-button color="accent">
       <mat-icon>remove_circle_outline</mat-icon>
       הורדת אורח
     </button>
-    <input class="number-of-guests" matInput placeholder="-">
-    <button mat-raised-button color="accent">
+    <label>
+      <input [value]="numOfGuests" class="number-of-guests" matInput placeholder="-">
+    </label>
+    <button (click)="handleAddGuest()" mat-raised-button color="accent">
       <mat-icon>add_circle_outline</mat-icon>
       הוספת אורח
     </button>
@@ -49,8 +51,20 @@
     </button>
   </div>
 
-  <div>מפת הגעה</div>
+  <div class="map">
+    מפת הגעה
+    <agm-map
+      [latitude]='lat'
+      [longitude]='lng'
+    >
+      <agm-marker
+        [latitude]="lat"
+        [longitude]="lng">
+      </agm-marker>
 
-  <div>טעות במספר?</div>
+    </agm-map>
+  </div>
+
+  <div>?טעות במספר</div>
 
 </div>
