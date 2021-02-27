@@ -1,0 +1,25 @@
+.center {
+  text-align: center;
+  background: gainsboro;
+  font-size: large;
+}
+
+.title {
+  margin: 24px;
+}
+
+.number-of-guests {
+  width: 50px;
+  height: 25px;
+  text-align: center;
+  margin: 10px;
+}
+
+.is-arriving {
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  margin: 8px;
+}
