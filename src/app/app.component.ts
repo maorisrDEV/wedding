@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable, of} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {catchError, map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +15,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // TODO get number of guests on invited count
   }
 
   handleAddGuest(): void {
