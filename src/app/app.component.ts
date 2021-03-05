@@ -8,8 +8,8 @@ import {HttpClient} from '@angular/common/http';
 })
 export class AppComponent implements OnInit {
   public numOfGuests = 0;
-  lat = 13;
-  lng = 80;
+  lat = 32.445022;
+  lng = 34.937016;
 
   constructor(httpClient: HttpClient) {
   }

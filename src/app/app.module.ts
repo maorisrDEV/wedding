@@ -23,7 +23,7 @@ import { AgmCoreModule } from '@agm/core';
     MatButtonModule,
     HttpClientModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDx5ptDggnpOmIe0KTtyBq9mUgPbhE2QJA',
+      apiKey: process.env.GOOGLE_MAPS_API_KEY,
       libraries: ['places']
     })
   ],

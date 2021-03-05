@@ -1,8 +1,15 @@
+.logo {
+  margin-top: 8px;
+  border-radius: 30px;
+  width: 70%;
+  max-width: 300px;
+}
+
 .center {
   text-align: center;
   font-size: large;
-  background: gainsboro;
   height: 100%;
+  color: black;
 }
 
 .title {
