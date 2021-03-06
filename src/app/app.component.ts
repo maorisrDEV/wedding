@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {GuestsService} from '../services/guests.service';
+import {IGuest} from '../interfaces/interfaces';
 
 @Component({
   selector: 'app-root',
@@ -7,23 +8,44 @@ import {HttpClient} from '@angular/common/http';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  public numOfGuests = 0;
   lat = 32.445022;
   lng = 34.937016;
+  guestData: IGuest = null;
 
-  constructor(httpClient: HttpClient) {
+  constructor(private guestService: GuestsService) {
   }
 
   ngOnInit(): void {
+    this.guestService.getGuestByID('test').subscribe(response => {
+      this.guestData = response;
+    });
   }
 
   handleAddGuest(): void {
-    this.numOfGuests++;
+    this.guestData.amountOfGuests++;
   }
 
   handleRemoveGuest(): void {
-    if (this.numOfGuests) {
-      this.numOfGuests--;
+    if (this.guestData.amountOfGuests >= 1) {
+      this.guestData.amountOfGuests--;
     }
+  }
+
+  handleWillArriveBtnClicked(willArrive: string): void {
+    this.guestData.willArrive = willArrive;
+  }
+
+  saveGuestData(): void {
+    this.guestService.updateGuestData(this.guestData).subscribe(response => {
+      if (response) {
+        alert('סטטוס הגעה עודכן בהצלחה, מצפים לבואכם! שימו לב: ניתן לעדכן את סטטוס ההגעה בכל עת.');
+      } else {
+        alert('ארעה שגיאה בעדכון סטטוס ההגעה. אנא נסו מאוחר יותר');
+      }
+    });
+  }
+
+  messageTextChanged($event: any): void {
+    this.guestData.message = $event.target.value;
   }
 }

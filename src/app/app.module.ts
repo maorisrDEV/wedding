@@ -9,6 +9,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
+import {FormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { AgmCoreModule } from '@agm/core';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
     MatIconModule,
     MatInputModule,
     MatButtonModule,

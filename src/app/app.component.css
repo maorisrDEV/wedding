@@ -1,15 +1,17 @@
-.logo {
-  margin-top: 8px;
-  border-radius: 30px;
-  width: 70%;
-  max-width: 300px;
-}
-
 .center {
   text-align: center;
   font-size: large;
   height: 100%;
-  color: black;
+  position: absolute; /* Position the background text */
+  bottom: 0; /* At the bottom. Use top:0 to append it to the top */
+  background: rgb(0, 0, 0); /* Fallback color */
+  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+  color: #f1f1f1; /* Grey text */
+  width: 100%; /* Full width */
+}
+
+.logo {
+  width: 100%;
 }
 
 .title {
@@ -17,6 +19,7 @@
 }
 
 .number-of-guests {
+  font-size: 22px;
   width: 50px;
   height: 25px;
   text-align: center;
@@ -40,4 +43,18 @@ agm-map {
 .map {
   display: flex;
   justify-content: center;
+}
+
+.cal-link {
+  margin-right: 10px;
+  text-decoration: none !important;
+}
+
+.selected {
+  border: 3px whitesmoke solid;
+}
+
+.message-input {
+  width: 60%;
+  max-width: 300px;
 }
