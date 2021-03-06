@@ -12,12 +12,14 @@ export class GuestsService {
   }
 
   public getGuestByID(id: string): Observable<any> {
-    const url = 'http://localhost:3000/guests/getGuestById';
+    // const url = 'http://localhost:3000/guests/getGuestById';
+    const url = 'https://lm-wedding-backend.herokuapp.com/guests/getGuestById';
     return this.http.post(url, {id: '603d3815b139913ddc44117c'});
   }
 
   public updateGuestData(guest: IGuest): Observable<any> {
-    const url = 'http://localhost:3000/guests/updateGuestData';
+    // const url = 'http://localhost:3000/guests/updateGuestData';
+    const url = 'https://lm-wedding-backend.herokuapp.com/guests/updateGuestData';
     return this.http.post(url, guest);
   }
 
