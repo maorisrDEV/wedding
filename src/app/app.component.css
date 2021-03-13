@@ -1,5 +1,5 @@
 .background {
-  background-image: url("https://i.ibb.co/dDQtBry/wedding-quotes-1587481892.jpg");
+  background-image: url("/assets/images/wedding-quotes-1587481892 (1).jpg");
   background-size: cover;
   height: 100%;
 }
@@ -80,7 +80,7 @@ agm-map {
   height: 48px;
 }
 
-.icon-size:hover {
-  background-color: #9d9494;
-  border-radius: 100px;
-}
+/*.icon-size:hover {*/
+/*  background-color: #9d9494;*/
+/*  border-radius: 100px;*/
+/*}*/
