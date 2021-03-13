@@ -7,7 +7,7 @@
     <div class="center">
       <!--  <img class="logo" src='https://s3-eu-west-1.amazonaws.com/easy2give-rsvp-prod/event/23187_1567078198.101024.jpeg'>-->
 
-      <h2 style="font-weight: bolder; padding-top: 2rem">
+      <h2 style="font-weight: bolder; padding-top: 2rem;">
         !שלום {{guestData.name}}
         <br>
         לירז כהן ומאור ישראל נרגשים להזמינכם
@@ -18,25 +18,25 @@
       <h1>
         <div style="font-weight: bold">
           ביום רביעי ה-
-          10/11/2021 בשעה 19:00
+          17/11/2021 בשעה 19:00
           <br>
           YARA בגן האירועים
         </div>
       </h1>
 
       - כמה אורחים מגיעים -
-      <div>
-        <button (click)="handleRemoveGuest()" mat-raised-button color="accent">
-          <mat-icon>remove_circle_outline</mat-icon>
-          הורדת אורח
-        </button>
-        <label>
-          <input [value]="guestData?.amountOfGuests?.toString()" class="number-of-guests" matInput placeholder="-">
-        </label>
-        <button (click)="handleAddGuest()" mat-raised-button color="accent">
-          <mat-icon>add_circle_outline</mat-icon>
-          הוספת אורח
-        </button>
+      <div class="amount-of-guests">
+        <div class="icon-size">
+          <mat-icon class="gusset-icon" (click)="handleRemoveGuest()">remove_circle_outline</mat-icon>
+        </div>
+        <div>
+          <label>
+            <input [value]="guestData?.amountOfGuests?.toString()" class="number-of-guests" matInput placeholder="-">
+          </label>
+        </div>
+        <div class="icon-size">
+          <mat-icon class="gusset-icon" (click)="handleAddGuest()">add_circle_outline</mat-icon>
+        </div>
       </div>
 
       - אשרו את הגעתכם -
@@ -89,10 +89,10 @@
 
 
       <div style="margin: 10px">
-        <a class="cal-link"
+        <a mat-raised-button class="cal-link"
            href="http://www.google.com/calendar/render?action=TEMPLATE&amp;text=%D7%93%D7%A0%D7%99%D7%90%D7%9C%20%D7%9E%D7%95%D7%A8%D7%93%20%D7%A1%D7%A7%D7%94%20%D7%95%D7%9C%D7%99%D7%A8%D7%95%D7%9F%20%D7%A7%D7%95%D7%A0%D7%A4%D7%99%D7%A0%D7%95&amp;dates=20190909T190000/20190909T200000&amp;details=19:00%20-%20%D7%97%D7%AA%D7%95%D7%A0%D7%94%20-%20%D7%90%D7%92%D7%93%D7%AA%D7%90%20-%20%D7%93%D7%A0%D7%99%D7%90%D7%9C%20%D7%9E%D7%95%D7%A8%D7%93%20%D7%A1%D7%A7%D7%94%20%D7%95%D7%9C%D7%99%D7%A8%D7%95%D7%9F%20%D7%A7%D7%95%D7%A0%D7%A4%D7%99%D7%A0%D7%95&amp;location=%D7%90%D7%92%D7%93%D7%AA%D7%90&amp;trp=false&amp;sprop=&amp;sprop=name:"
            target="_blank" rel="nofollow">הוסיף/י ליומן 🗓</a>
-        <a href="http://waze.to/?ll=32.445022,34.937016">
+        <a mat-raised-button href="http://waze.to/?ll=32.445022,34.937016">
           Waze נווט דרך
         </a>
       </div>

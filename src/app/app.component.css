@@ -1,18 +1,17 @@
 .background {
   background-image: url("https://i.ibb.co/dDQtBry/wedding-quotes-1587481892.jpg");
   background-size: cover;
+  height: 100%;
 }
 
 .center {
   text-align: center;
   font-size: large;
   height: 100%;
-  /*position: absolute; !* Position the background text *!*/
-  bottom: 0; /* At the bottom. Use top:0 to append it to the top */
+  width: 100%; /* Full width */
   background: rgb(0, 0, 0); /* Fallback color */
   background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
   color: #f1f1f1; /* Grey text */
-  width: 100%; /* Full width */
 }
 
 .logo {
@@ -62,4 +61,26 @@ agm-map {
 .message-input {
   width: 60%;
   max-width: 300px;
+}
+
+.amount-of-guests {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gusset-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+}
+
+.icon-size {
+  width: 48px;
+  height: 48px;
+}
+
+.icon-size:hover {
+  background-color: #9d9494;
+  border-radius: 100px;
 }
