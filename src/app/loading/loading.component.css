@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap');
+* {
+  padding: 0;
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+}
+
+body {
+  background: #fff;
+}
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+
+
+  animation: animate 5s infinite linear;
+}
+
+@keyframes animate {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) scale(.5);
+    box-shadow: 0 0 0 0 #00a8ff, 0 0 0 0 #9c88ff, 0 0 0 0 #fbc531,
+    0 0 0 0 #4cd137, 0 0 0 0 #487eb0, 0 0 0 0 #e84118,
+    0 0 0 0 #7f8fa6, 0 0 0 0 #192a56, 0 0 0 0 #353b48,
+    0 0 0 0 #e84393, 0 0 0 0 #55efc4, 0 0 0 0 #6D214F,
+    0 0 0 0 #182C61, 0 0 0 0 #82589F;
+  }
+  30% {
+    transform: translate(-50%, -50%) rotate(200deg) scale(1);
+    box-shadow: 9px -130px 0 -70px #00a8ff, 64px -114px 0 -70px #9c88ff, 109px -74px 0 -70px #fbc531,
+    129px -20px 0 -70px #4cd137, 124px 41px 0 -70px #487eb0, 92px 93px 0 -70px #e84118,
+    40px 124px 0 -70px #7f8fa6, -21px 129px 0 -70px #192a56, -73px 107px 0 -70px #353b48,
+    -112px 67px 0 -70px #e84393, -131px 12px 0 -70px #55efc4, -124px -44px 0 -70px #6D214F,
+    -94px -91px 0 -70px #182C61, -46px -121px 0 -70px #82589F;
+  }
+  70% {
+    transform: translate(-50%, -50%) rotate(360deg) scale(1);
+    box-shadow: 9px -130px 0 -70px #00a8ff, 64px -114px 0 -70px #9c88ff, 109px -74px 0 -70px #fbc531,
+    129px -20px 0 -70px #4cd137, 124px 41px 0 -70px #487eb0, 92px 93px 0 -70px #e84118,
+    40px 124px 0 -70px #7f8fa6, -21px 129px 0 -70px #192a56, -73px 107px 0 -70px #353b48,
+    -112px 67px 0 -70px #e84393, -131px 12px 0 -70px #55efc4, -124px -44px 0 -70px #6D214F,
+    -94px -91px 0 -70px #182C61, -46px -121px 0 -70px #82589F;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(0deg) scale(.5);
+    box-shadow: 0 0 0 0 #00a8ff, 0 0 0 0 #9c88ff, 0 0 0 0 #fbc531,
+    0 0 0 0 #4cd137, 0 0 0 0 #487eb0, 0 0 0 0 #e84118,
+    0 0 0 0 #7f8fa6, 0 0 0 0 #192a56, 0 0 0 0 #353b48,
+    0 0 0 0 #e84393, 0 0 0 0 #55efc4, 0 0 0 0 #6D214F,
+    0 0 0 0 #182C61, 0 0 0 0 #82589F;
+  }
+}
+
+.loading-text {
+  background-color: whitesmoke;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: right;
+  direction: rtl;
+}

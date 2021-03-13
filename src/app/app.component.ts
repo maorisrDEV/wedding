@@ -11,6 +11,7 @@ export class AppComponent implements OnInit {
   lat = 32.445022;
   lng = 34.937016;
   guestData: IGuest = null;
+  loading = true;
 
   constructor(private guestService: GuestsService) {
   }
@@ -18,6 +19,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.guestService.getGuestByID('test').subscribe(response => {
       this.guestData = response;
+      this.loading = false;
     });
   }
 
