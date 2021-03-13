@@ -2,111 +2,113 @@
   <app-loading></app-loading>
 </ng-container>
 
-<ng-template class="background" #showPage>
-  <div class="center">
-    <!--  <img class="logo" src='https://s3-eu-west-1.amazonaws.com/easy2give-rsvp-prod/event/23187_1567078198.101024.jpeg'>-->
+<ng-template #showPage>
+  <div class="background">
+    <div class="center">
+      <!--  <img class="logo" src='https://s3-eu-west-1.amazonaws.com/easy2give-rsvp-prod/event/23187_1567078198.101024.jpeg'>-->
 
-    <h2 style="font-weight: bolder; padding-top: 2rem">
-      !שלום {{guestData.name}}
-      <br>
-      לירז כהן ומאור ישראל נרגשים להזמינכם
-      <br>
-      לחגוג את יום שמחתם
-    </h2>
-
-    <h1>
-      <div style="font-weight: bold">
-        ביום רביעי ה-
-        10/11/2021 בשעה 19:00
+      <h2 style="font-weight: bolder; padding-top: 2rem">
+        !שלום {{guestData.name}}
         <br>
-        YARA בגן האירועים
+        לירז כהן ומאור ישראל נרגשים להזמינכם
+        <br>
+        לחגוג את יום שמחתם
+      </h2>
+
+      <h1>
+        <div style="font-weight: bold">
+          ביום רביעי ה-
+          10/11/2021 בשעה 19:00
+          <br>
+          YARA בגן האירועים
+        </div>
+      </h1>
+
+      - כמה אורחים מגיעים -
+      <div>
+        <button (click)="handleRemoveGuest()" mat-raised-button color="accent">
+          <mat-icon>remove_circle_outline</mat-icon>
+          הורדת אורח
+        </button>
+        <label>
+          <input [value]="guestData?.amountOfGuests?.toString()" class="number-of-guests" matInput placeholder="-">
+        </label>
+        <button (click)="handleAddGuest()" mat-raised-button color="accent">
+          <mat-icon>add_circle_outline</mat-icon>
+          הוספת אורח
+        </button>
       </div>
-    </h1>
 
-    - כמה אורחים מגיעים -
-    <div>
-      <button (click)="handleRemoveGuest()" mat-raised-button color="accent">
-        <mat-icon>remove_circle_outline</mat-icon>
-        הורדת אורח
-      </button>
-      <label>
-        <input [value]="guestData?.amountOfGuests?.toString()" class="number-of-guests" matInput placeholder="-">
-      </label>
-      <button (click)="handleAddGuest()" mat-raised-button color="accent">
-        <mat-icon>add_circle_outline</mat-icon>
-        הוספת אורח
-      </button>
-    </div>
+      - אשרו את הגעתכם -
+      <div class="is-arriving">
+        <button mat-raised-button color="accent"
+                (click)="handleWillArriveBtnClicked('yes')"
+                [ngClass]="guestData.willArrive === 'yes' ? 'selected' : null">
+          <mat-icon>done</mat-icon>
+          מגיע
+        </button>
+        <button mat-raised-button color="accent"
+                (click)="handleWillArriveBtnClicked('no')"
+                [ngClass]="guestData.willArrive === 'no' ? 'selected' : null">
+          <mat-icon>close</mat-icon>
+          לא מגיע/ה
+        </button>
+        <button mat-raised-button color="accent"
+                (click)="handleWillArriveBtnClicked('maybe')"
+                [ngClass]="guestData.willArrive === 'maybe' ? 'selected' : null">
+          <mat-icon>help_outline</mat-icon>
+          אולי מגיע
+        </button>
+      </div>
 
-    - אשרו את הגעתכם -
-    <div class="is-arriving">
-      <button mat-raised-button color="accent"
-              (click)="handleWillArriveBtnClicked('yes')"
-              [ngClass]="guestData.willArrive === 'yes' ? 'selected' : null">
-        <mat-icon>done</mat-icon>
-        מגיע
-      </button>
-      <button mat-raised-button color="accent"
-              (click)="handleWillArriveBtnClicked('no')"
-              [ngClass]="guestData.willArrive === 'no' ? 'selected' : null">
-        <mat-icon>close</mat-icon>
-        לא מגיע/ה
-      </button>
-      <button mat-raised-button color="accent"
-              (click)="handleWillArriveBtnClicked('maybe')"
-              [ngClass]="guestData.willArrive === 'maybe' ? 'selected' : null">
-        <mat-icon>help_outline</mat-icon>
-        אולי מגיע
-      </button>
-    </div>
-
-    <div style="margin-top: 8px">
-      <label>
-        - הוספת הערה לבעלי השמחה -
-        <br>
-        <textarea matInput
-                  [value]="guestData?.message"
-                  (change)="messageTextChanged($event)"
-                  class="message-input"
-                  placeholder="כתוב הערה כאן (אופציונלי)"
-                  dir="rtl"
-                  style="font: inherit"
-        >
+      <div style="margin-top: 8px">
+        <label>
+          - הוספת הערה לבעלי השמחה -
+          <br>
+          <textarea matInput
+                    [value]="guestData?.message"
+                    (change)="messageTextChanged($event)"
+                    class="message-input"
+                    placeholder="כתוב הערה כאן (אופציונלי)"
+                    dir="rtl"
+                    style="font: inherit"
+          >
       </textarea>
-      </label>
-    </div>
+        </label>
+      </div>
 
 
-    <div style="padding: 1rem">
-      <button mat-raised-button
-              color="accent"
-              (click)="saveGuestData()">
-        עדכון סטטוס הגעה
-      </button>
+      <div style="padding: 1rem">
+        <button mat-raised-button
+                color="accent"
+                (click)="saveGuestData()">
+          עדכון סטטוס הגעה
+        </button>
 
-    </div>
+      </div>
 
 
-    <div style="margin: 10px">
-      <a class="cal-link"
-         href="http://www.google.com/calendar/render?action=TEMPLATE&amp;text=%D7%93%D7%A0%D7%99%D7%90%D7%9C%20%D7%9E%D7%95%D7%A8%D7%93%20%D7%A1%D7%A7%D7%94%20%D7%95%D7%9C%D7%99%D7%A8%D7%95%D7%9F%20%D7%A7%D7%95%D7%A0%D7%A4%D7%99%D7%A0%D7%95&amp;dates=20190909T190000/20190909T200000&amp;details=19:00%20-%20%D7%97%D7%AA%D7%95%D7%A0%D7%94%20-%20%D7%90%D7%92%D7%93%D7%AA%D7%90%20-%20%D7%93%D7%A0%D7%99%D7%90%D7%9C%20%D7%9E%D7%95%D7%A8%D7%93%20%D7%A1%D7%A7%D7%94%20%D7%95%D7%9C%D7%99%D7%A8%D7%95%D7%9F%20%D7%A7%D7%95%D7%A0%D7%A4%D7%99%D7%A0%D7%95&amp;location=%D7%90%D7%92%D7%93%D7%AA%D7%90&amp;trp=false&amp;sprop=&amp;sprop=name:"
-         target="_blank" rel="nofollow">הוסיף/י ליומן 🗓</a>
-      <a href="http://waze.to/?ll=32.445022,34.937016">
-        Waze נווט דרך
-      </a>
-    </div>
+      <div style="margin: 10px">
+        <a class="cal-link"
+           href="http://www.google.com/calendar/render?action=TEMPLATE&amp;text=%D7%93%D7%A0%D7%99%D7%90%D7%9C%20%D7%9E%D7%95%D7%A8%D7%93%20%D7%A1%D7%A7%D7%94%20%D7%95%D7%9C%D7%99%D7%A8%D7%95%D7%9F%20%D7%A7%D7%95%D7%A0%D7%A4%D7%99%D7%A0%D7%95&amp;dates=20190909T190000/20190909T200000&amp;details=19:00%20-%20%D7%97%D7%AA%D7%95%D7%A0%D7%94%20-%20%D7%90%D7%92%D7%93%D7%AA%D7%90%20-%20%D7%93%D7%A0%D7%99%D7%90%D7%9C%20%D7%9E%D7%95%D7%A8%D7%93%20%D7%A1%D7%A7%D7%94%20%D7%95%D7%9C%D7%99%D7%A8%D7%95%D7%9F%20%D7%A7%D7%95%D7%A0%D7%A4%D7%99%D7%A0%D7%95&amp;location=%D7%90%D7%92%D7%93%D7%AA%D7%90&amp;trp=false&amp;sprop=&amp;sprop=name:"
+           target="_blank" rel="nofollow">הוסיף/י ליומן 🗓</a>
+        <a href="http://waze.to/?ll=32.445022,34.937016">
+          Waze נווט דרך
+        </a>
+      </div>
 
-    <div class="map">
-      <agm-map
-        [latitude]='lat'
-        [longitude]='lng'
-      >
-        <agm-marker
-          [latitude]="lat"
-          [longitude]="lng">
-        </agm-marker>
+      <div class="map">
+        <agm-map
+          [latitude]='lat'
+          [longitude]='lng'
+        >
+          <agm-marker
+            [latitude]="lat"
+            [longitude]="lng">
+          </agm-marker>
 
-      </agm-map>
+        </agm-map>
+      </div>
     </div>
   </div>
 </ng-template>
