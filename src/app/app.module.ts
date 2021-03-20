@@ -11,12 +11,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 import {FormsModule} from '@angular/forms';
 import { LoadingComponent } from './loading/loading.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { HomeComponent } from './home/home.component';
+import {AppRoutingModule} from './app-routing.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoadingComponent
+    LoadingComponent,
+    PageNotFoundComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +34,8 @@ import { LoadingComponent } from './loading/loading.component';
     AgmCoreModule.forRoot({
       apiKey: process.env.GOOGLE_MAPS_API_KEY,
       libraries: ['places']
-    })
+    }),
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

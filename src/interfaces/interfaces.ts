@@ -5,4 +5,5 @@ export interface IGuest {
   amountOfGuests: number;
   willArrive: string;
   message: string;
+  visits: number;
 }

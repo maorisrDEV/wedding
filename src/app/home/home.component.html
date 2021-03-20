@@ -1,0 +1,116 @@
+<ng-container *ngIf="loading; else showPage">
+  <app-loading></app-loading>
+</ng-container>
+
+<ng-template #showPage>
+  <img class="logo" src='https://s3-eu-west-1.amazonaws.com/easy2give-rsvp-prod/event/23187_1567078198.101024.jpeg'>
+  <div class="background">
+    <div class="center">
+      <h2 style="font-weight: bolder; padding-top: 1rem;">
+        !שלום {{guestData.name}}
+        <br>
+        לירז כהן ומאור ישראל נרגשים להזמינכם
+        <br>
+        לחגוג את יום שמחתם
+      </h2>
+
+      <h1>
+        <div style="font-weight: bold">
+          ביום רביעי ה-
+          17/11/2021 בשעה 19:00
+          <br>
+          YARA בגן האירועים
+        </div>
+      </h1>
+
+      - כמה אורחים מגיעים -
+      <div class="amount-of-guests">
+        <div class="icon-size">
+          <mat-icon class="gusset-icon" (click)="handleRemoveGuest()">remove_circle_outline</mat-icon>
+        </div>
+        <div>
+          <label>
+            <input [value]="guestData?.amountOfGuests?.toString()" class="number-of-guests" matInput placeholder="-">
+          </label>
+        </div>
+        <div class="icon-size">
+          <mat-icon class="gusset-icon" (click)="handleAddGuest()">add_circle_outline</mat-icon>
+        </div>
+      </div>
+
+      - אשרו את הגעתכם -
+      <div class="is-arriving">
+        <button mat-raised-button color="accent"
+                (click)="handleWillArriveBtnClicked('no')"
+                [ngClass]="guestData.willArrive === 'no' ? 'selected' : null"
+                class="not-arriving-btn">
+          <mat-icon>close</mat-icon>
+          לא מגיע/ה
+        </button>
+        <button mat-raised-button color="accent"
+                (click)="handleWillArriveBtnClicked('yes')"
+                [ngClass]="guestData.willArrive === 'yes' ? 'selected' : null"
+                class="arriving-btn">
+          <mat-icon>done</mat-icon>
+          מגיע/ה
+        </button>
+        <!--        <button mat-raised-button color="accent"-->
+        <!--                (click)="handleWillArriveBtnClicked('maybe')"-->
+        <!--                [ngClass]="guestData.willArrive === 'maybe' ? 'selected' : null">-->
+        <!--          <mat-icon>help_outline</mat-icon>-->
+        <!--          אולי מגיע/ה-->
+        <!--        </button>-->
+      </div>
+
+      <div style="margin-top: 8px">
+        <label>
+          - הוספת הערה לבעלי השמחה -
+          <br>
+          <textarea matInput
+                    [value]="guestData?.message"
+                    (change)="messageTextChanged($event)"
+                    class="message-input"
+                    placeholder="כתוב הערה כאן (אופציונלי)"
+                    dir="rtl"
+                    style="font: inherit"
+          >
+      </textarea>
+        </label>
+      </div>
+
+
+      <div style="padding: 4px">
+        <button mat-raised-button
+                class="save-btn"
+                (click)="saveGuestData()">
+          עדכון סטטוס הגעה
+        </button>
+
+      </div>
+
+
+      <div style="margin: 10px">
+        <a mat-raised-button class="cal-link"
+           href="https://calendar.google.com/event?action=TEMPLATE&tmeid=MmQxNGcxYmkxNmN2cnFhc3JocG91YmZlNTUgdHJtYm85MkBt&tmsrc=trmbo92%40gmail.com"
+           target="_blank" rel="nofollow">הוסיף/י ליומן 🗓</a>
+        <a mat-raised-button href="http://waze.to/?ll=32.445022,34.937016">
+          Waze נווט דרך
+        </a>
+      </div>
+
+      <div class="map">
+        <agm-map
+          [latitude]='lat'
+          [longitude]='lng'
+        >
+          <agm-marker
+            [latitude]="lat"
+            [longitude]="lng">
+          </agm-marker>
+
+        </agm-map>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
