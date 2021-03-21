@@ -57,6 +57,7 @@ export class HomeComponent implements OnInit {
 
   handleWillArriveBtnClicked(willArrive: string): void {
     this.guestData.willArrive = willArrive;
+    this.saveGuestData();
   }
 
   saveGuestData(): void {
