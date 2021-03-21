@@ -106,7 +106,7 @@ agm-map {
 }
 
 .navigate-calender {
-  padding-top: 16px;
+  padding: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
