@@ -31,11 +31,11 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     if (this.guestId) {
       this.guestService.getGuestByID(this.guestId).subscribe(response => {
-        const loader = this.renderer.selectRootElement('#loader');
-        this.renderer.setStyle(loader, 'display', 'none');
         if (response) {
           this.guestData = response;
           this.loading = false;
+          const loader = this.renderer.selectRootElement('#loader');
+          this.renderer.setStyle(loader, 'display', 'none');
         } else {
           this.router.navigateByUrl('/404');
         }
