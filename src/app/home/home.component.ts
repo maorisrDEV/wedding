@@ -19,8 +19,6 @@ export class HomeComponent implements OnInit {
 
   constructor(private guestService: GuestsService, private router: Router,
               private activatedRoute: ActivatedRoute, private renderer: Renderer2) {
-    const loader = this.renderer.selectRootElement('#loader');
-    this.renderer.setStyle(loader, 'display', 'none');
     this.guestId = this.activatedRoute.snapshot.paramMap.get('id');
     if (this.guestId) {
       this.increaseVisits();
@@ -33,6 +31,8 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     if (this.guestId) {
       this.guestService.getGuestByID(this.guestId).subscribe(response => {
+        const loader = this.renderer.selectRootElement('#loader');
+        this.renderer.setStyle(loader, 'display', 'none');
         if (response) {
           this.guestData = response;
           this.loading = false;
