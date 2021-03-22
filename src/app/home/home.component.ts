@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Renderer2} from '@angular/core';
 import {GuestsService} from '../../services/guests.service';
 import {IGuest} from '../../interfaces/interfaces';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -18,7 +18,9 @@ export class HomeComponent implements OnInit {
   lng = 34.937016;
 
   constructor(private guestService: GuestsService, private router: Router,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute, private renderer: Renderer2) {
+    const loader = this.renderer.selectRootElement('#loader');
+    this.renderer.setStyle(loader, 'display', 'none');
     this.guestId = this.activatedRoute.snapshot.paramMap.get('id');
     if (this.guestId) {
       this.increaseVisits();
