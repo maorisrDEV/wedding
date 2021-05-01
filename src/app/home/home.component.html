@@ -44,7 +44,7 @@
           - הוספת הערה לבעלי השמחה -
           <br>
           <textarea matInput
-                    [value]="guestData?.message"
+                    [value]="guestData?.message || ''"
                     (change)="messageTextChanged($event)"
                     class="message-input"
                     placeholder="כתוב הערה כאן (אופציונלי)"
@@ -107,12 +107,17 @@
 
       <div class="navigate-calender">
         <div>
-          <a mat-raised-button class="cal-link"
-             href="https://calendar.google.com/event?action=TEMPLATE&tmeid=MmQxNGcxYmkxNmN2cnFhc3JocG91YmZlNTUgdHJtYm85MkBt&tmsrc=trmbo92%40gmail.com"
-             target="_blank" rel="nofollow" style="padding-right: 0;">
+          <a mat-raised-button class="cal-link" target="_blank" href="https://calendar.google.com/event?action=TEMPLATE&amp;tmeid=MmQxNGcxYmkxNmN2cnFhc3JocG91YmZlNTUgdHJtYm85MkBt&amp;tmsrc=trmbo92%40gmail.com">
             הוסיף/י ליומן
             <img class="waze-logo" src="./assets/images/calender.png" alt="הוסף ליומן"/>
           </a>
+
+<!--          <a mat-raised-button class="cal-link"-->
+<!--             href="https://calendar.google.com/event?action=TEMPLATE&tmeid=MmQxNGcxYmkxNmN2cnFhc3JocG91YmZlNTUgdHJtYm85MkBt&tmsrc=trmbo92%40gmail.com"-->
+<!--             target="_blank" rel="nofollow" style="padding-right: 0;">-->
+<!--          הוסיף/י ליומן-->
+<!--          <img class="waze-logo" src="./assets/images/calender.png" alt="הוסף ליומן"/>-->
+<!--          </a>-->
         </div>
 
         <div>
