@@ -1,7 +1,9 @@
-import {Component, OnInit, Renderer2} from '@angular/core';
-import {GuestsService} from '../../services/guests.service';
+import {AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {GuestsService} from '../services/guests.service';
 import {IGuest} from '../../interfaces/interfaces';
 import {ActivatedRoute, Router} from '@angular/router';
+import * as mapboxgl from 'mapbox-gl';
+import set = Reflect.set;
 
 @Component({
   selector: 'app-home',
@@ -9,13 +11,16 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 
-
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
   guestId = null;
   guestData: IGuest = null;
   loading = true;
-  lat = 32.445022;
-  lng = 34.937016;
+  lat = 32.4446032;
+  lng = 34.9358856;
+
+  @ViewChild('mapElement') public mapElement: ElementRef;
+  map: mapboxgl.Map;
+  style = 'mapbox://styles/mapbox/streets-v11';
 
   constructor(private guestService: GuestsService, private router: Router,
               private activatedRoute: ActivatedRoute, private renderer: Renderer2) {
@@ -26,6 +31,32 @@ export class HomeComponent implements OnInit {
       this.router.navigateByUrl('/404');
     }
 
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      mapboxgl.accessToken = 'pk.eyJ1IjoidHJtYm85MjEiLCJhIjoiY2tvNjJwdmRlMDdvbTJubnh4eDNibTViOCJ9.kBVtOIOT4vhtfHqcg6MSGg';
+      this.map = new mapboxgl.Map({
+        container: this.mapElement.nativeElement,
+        style: this.style,
+        zoom: 13,
+        center: [this.lng, this.lat]
+      });
+
+      const popup = new mapboxgl.Popup()
+        .setLngLat([this.lng, this.lat])
+        .setHTML(`<h1>גן האירועים יארה, כביש קיסריה גן שמואל</h1>`);
+
+      const marker = new mapboxgl.Marker({
+        color: 'red',
+        draggable: true
+      }).setLngLat([this.lng, this.lat])
+        .setPopup(popup)
+        .addTo(this.map);
+
+      // Add map controls
+      this.map.addControl(new mapboxgl.NavigationControl());
+    }, 1000);
   }
 
   ngOnInit(): void {
