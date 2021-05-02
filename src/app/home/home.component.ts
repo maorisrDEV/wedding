@@ -4,7 +4,7 @@ import {IGuest} from '../../interfaces/interfaces';
 import {ActivatedRoute, Router} from '@angular/router';
 import * as mapboxgl from 'mapbox-gl';
 import set = Reflect.set;
-import { MatDialog } from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 import {DialogMessageComponent} from '../dialog-message/dialog-message.component';
 
 @Component({
@@ -98,21 +98,36 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   saveGuestData(): void {
     if (this.guestData.amountOfGuests === 0 && this.guestData.willArrive === 'yes') {
-      alert('שים לב: סימנת שהינך מגיע לאירוע אך כמות האורחים שווה לאפס. אנא עדכן את סטטוס ההגעה שנית.');
+      const dialogRef = this.dialog.open(DialogMessageComponent, {
+        data: {
+          isValid: false,
+          message: 'סימנת שהינך מגיע לאירוע אך כמות האורחים שווה לאפס. אנא עדכן כמות האורחים המגיעים.'
+        }
+      });
       return;
     }
     if (this.guestData.amountOfGuests > 0 && this.guestData.willArrive === 'no') {
-      alert('שים לב: סימנת שאינך מתכוון להגיע לאירוע אך כמות האורחים גדולה מאפס. אנא עדכן את סטטוס ההגעה שנית.');
+      const dialogRef = this.dialog.open(DialogMessageComponent, {
+        data: {
+          isValid: false,
+          message: 'סימנת שאינך מתכוון להגיע לאירוע אך כמות האורחים גדולה מאפס. במידה ואינך מתכוון להגיע אנא סמן אפס בכמות האורחים ולחץ שוב על לא מגיע/ה.'
+        }
+      });
       return;
     }
     this.guestService.updateGuestData(this.guestData).subscribe(response => {
       if (response) {
         if (this.guestData.willArrive === 'yes') {
           const dialogRef = this.dialog.open(DialogMessageComponent, {
-            data: 'מתרגשים ומצפים לראותכם :)'
+            data: {
+              isValid: true,
+              message: 'מתרגשים ומצפים לראותכם :)'
+            }
           });
         } else {
-          const dialogRef = this.dialog.open(DialogMessageComponent);
+          const dialogRef = this.dialog.open(DialogMessageComponent, {
+            data: {isValid: true}
+          });
         }
       }
     });
