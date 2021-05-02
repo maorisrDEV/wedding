@@ -14,6 +14,9 @@ import {LoadingComponent} from './loading/loading.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {HomeComponent} from './home/home.component';
 import {AppRoutingModule} from './app-routing.module';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogMessageComponent } from './dialog-message/dialog-message.component';
+
 
 
 @NgModule({
@@ -21,9 +24,11 @@ import {AppRoutingModule} from './app-routing.module';
     AppComponent,
     LoadingComponent,
     PageNotFoundComponent,
-    HomeComponent
+    HomeComponent,
+    DialogMessageComponent
   ],
   imports: [
+    MatDialogModule,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,

@@ -4,6 +4,8 @@ import {IGuest} from '../../interfaces/interfaces';
 import {ActivatedRoute, Router} from '@angular/router';
 import * as mapboxgl from 'mapbox-gl';
 import set = Reflect.set;
+import { MatDialog } from '@angular/material/dialog';
+import {DialogMessageComponent} from '../dialog-message/dialog-message.component';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +25,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   style = 'mapbox://styles/mapbox/streets-v11';
 
   constructor(private guestService: GuestsService, private router: Router,
-              private activatedRoute: ActivatedRoute, private renderer: Renderer2) {
+              private activatedRoute: ActivatedRoute, private renderer: Renderer2,
+              public dialog: MatDialog) {
     this.guestId = this.activatedRoute.snapshot.paramMap.get('id');
     if (this.guestId) {
       this.increaseVisits();
@@ -105,14 +108,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.guestService.updateGuestData(this.guestData).subscribe(response => {
       if (response) {
         if (this.guestData.willArrive === 'yes') {
-          alert('סטטוס ההגעה עודכן בהצלחה - מתרגשים ומצפים לבואכם!\n' +
-            'שימו לב - ניתן לעדכן את סטטוס ההגעה בכל עת.');
+          const dialogRef = this.dialog.open(DialogMessageComponent, {
+            data: 'מתרגשים ומצפים לראותכם :)'
+          });
         } else {
-          alert('סטטוס ההגעה עודכן בהצלחה.\n' +
-            'שימו לב - ניתן לשנות את סטטוס ההגעה בכל עת.');
+          const dialogRef = this.dialog.open(DialogMessageComponent);
         }
-      } else {
-        alert('ארעה שגיאה בעדכון סטטוס ההגעה. אנא נסו מאוחר יותר');
       }
     });
   }
