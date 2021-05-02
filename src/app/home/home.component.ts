@@ -104,6 +104,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
           message: 'סימנת שהינך מגיע לאירוע אך כמות האורחים שווה לאפס. אנא עדכן כמות האורחים המגיעים.'
         }
       });
+      this.guestData.willArrive = null;
       return;
     }
     if (this.guestData.amountOfGuests > 0 && this.guestData.willArrive === 'no') {
@@ -113,6 +114,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
           message: 'סימנת שאינך מתכוון להגיע לאירוע אך כמות האורחים גדולה מאפס. במידה ואינך מתכוון להגיע אנא סמן אפס בכמות האורחים ולחץ שוב על לא מגיע/ה.'
         }
       });
+      this.guestData.willArrive = null;
       return;
     }
     this.guestService.updateGuestData(this.guestData).subscribe(response => {
