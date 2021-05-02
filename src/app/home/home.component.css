@@ -118,17 +118,20 @@ agm-map {
 /*  border-radius: 100px;*/
 /*}*/
 
-.mapboxgl-popup-close-button {
+::ng-deep .mapboxgl-popup-close-button {
   display: none;
 }
 
-.mapboxgl-popup-content {
-  font: 400 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
+::ng-deep .mapboxgl-popup-content {
+  font-size: 12px;
+  font-family: 'heebo', sans-serif;
   padding: 0;
-  width: 180px;
+  width: 200px;
+  text-align: right;
+  color: black;
 }
 
-.mapboxgl-popup-content-wrapper {
+::ng-deep .mapboxgl-popup-content-wrapper {
   padding: 1%;
 }
 
