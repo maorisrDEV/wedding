@@ -111,7 +111,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       const dialogRef = this.dialog.open(DialogMessageComponent, {
         data: {
           isValid: false,
-          message: 'סימנת שאינך מתכוון להגיע לאירוע אך כמות האורחים גדולה מאפס. במידה ואינך מתכוון להגיע, אנא סמן אפס בכמות האורחים ולחץ שוב על לא מגיע/ה.'
+          message: 'סימנת שאינך מתכוון להגיע לאירוע אך כמות האורחים גדולה מאפס. במידה ואינך מתכוון להגיע, אנא סמן אפס בכמות האורחים ולחץ שוב על כפתור לא מגיע/ה.'
         }
       });
       this.guestData.willArrive = null;
