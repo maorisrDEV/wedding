@@ -135,3 +135,32 @@ agm-map {
   padding: 1%;
 }
 
+
+.corner-container {
+  width: 100%;
+  /*height: 100px;*/
+  position: relative;
+  background-color: grey;
+}
+
+.corner {
+  width: 0;
+  height: 0;
+  border-top: 150px solid #ffcc00;
+  border-bottom: 150px solid transparent;
+  border-left: 150px solid transparent;
+  position: absolute;
+  right: 0;
+}
+
+.corner span {
+  position: absolute;
+  top: -110px;
+  width: 100px;
+  left: -100px;
+  text-align: center;
+  font-size: 16px;
+  font-family: arial, serif;
+  transform: rotate(45deg);
+  display: block;
+}
