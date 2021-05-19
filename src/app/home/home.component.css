@@ -160,7 +160,7 @@ agm-map {
   left: -100px;
   text-align: center;
   font-size: 16px;
-  font-family: arial, serif;
+  font-family: 'heebo', sans-serif;
   transform: rotate(45deg);
   display: block;
 }
