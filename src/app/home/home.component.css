@@ -249,6 +249,7 @@ agm-map {
 }
 
 
+body,
 input,
 textarea,
 button,
@@ -256,4 +257,8 @@ select,
 mat-icon,
 a {
   -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -ms-user-select: none;
 }
