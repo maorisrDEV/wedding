@@ -168,6 +168,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.showImage = false;
     };
 
+    modal.onclick = () => {
+      modal.style.display = 'none';
+      this.showImage = false;
+    };
+
   }
 
 
