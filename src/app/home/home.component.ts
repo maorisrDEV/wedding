@@ -29,9 +29,7 @@ export class HomeComponent implements OnInit {
               private activatedRoute: ActivatedRoute, private renderer: Renderer2,
               public dialog: MatDialog) {
     this.guestId = this.activatedRoute.snapshot.paramMap.get('id');
-    if (this.guestId) {
-      this.increaseVisits();
-    } else {
+    if (!this.guestId) {
       this.router.navigateByUrl('/404');
     }
 
@@ -47,7 +45,7 @@ export class HomeComponent implements OnInit {
           const loader = this.renderer.selectRootElement('#loader');
           this.renderer.setStyle(loader, 'display', 'none');
           this.setMap();
-
+          this.increaseVisits();
         } else {
           this.router.navigateByUrl('/404');
         }
