@@ -4,8 +4,10 @@
 
 <ng-template #showPage>
 
-  <div (click)="handleCornerClick()" class="corner-container">
-    <div class="corner"><span>לחץ להצגת ההזמנה</span></div>
+  <div class="corner-container">
+    <div class="corner">
+      <span (click)="handleCornerClick()">לחץ להצגת ההזמנה</span>
+    </div>
   </div>
 
   <div id="myModal" class="modal">
