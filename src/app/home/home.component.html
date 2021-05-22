@@ -4,13 +4,17 @@
 
 <ng-template #showPage>
 
-  <div class="corner-container">
+  <div (click)="handleCornerClick()" class="corner-container">
     <div class="corner"><span>לחץ להצגת ההזמנה</span></div>
   </div>
 
+  <div id="myModal" class="modal">
+    <span class="close">סגירה &times;</span>
+    <img src="/assets/images/ortal.jpg" class="modal-content" alt="הזמנה">
+    <div id="caption"></div>
+  </div>
 
-<!--  <img class="logo" src='/assets/images/ortal.jpg'>-->
-  <div class="background">
+  <div *ngIf="!showImage" class="background">
     <div class="center">
       <h2 style="font-weight: bolder; padding-top: 7rem;">
         !שלום {{guestData.name}}
@@ -25,7 +29,7 @@
           ביום רביעי ה-
           21/06/2021 בשעה 19:30
           <br>
-           בטרה, קיסריה
+          בטרה, קיסריה
         </div>
       </h1>
 
@@ -136,8 +140,6 @@
         </div>
       </div>
     </div>
-
-
   </div>
 </ng-template>
 

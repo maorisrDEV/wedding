@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   loading = true;
   lat = 32.4446032;
   lng = 34.9358856;
+  showImage = false;
 
   @ViewChild('mapElement') public mapElement: ElementRef;
   map: mapboxgl.Map;
@@ -149,4 +150,25 @@ export class HomeComponent implements OnInit, AfterViewInit {
     console.log(this.guestData);
     return this.guestData?.amountOfGuests !== null && this.guestData?.willArrive !== null;
   }
+
+  handleCornerClick(): void {
+    this.showImage = true;
+    const modal = document.getElementById('myModal');
+    if (modal.style.display === 'block') {
+      modal.style.display = 'none';
+    } else {
+      modal.style.display = 'block';
+    }
+
+    // Get the <span> element that closes the modal
+    const span: any = document.getElementsByClassName('close')[0];
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = () => {
+      modal.style.display = 'none';
+      this.showImage = false;
+    };
+
+  }
+
+
 }
