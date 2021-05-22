@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {GuestsService} from '../services/guests.service';
 import {IGuest} from '../../interfaces/interfaces';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -13,7 +13,7 @@ import {DialogMessageComponent} from '../dialog-message/dialog-message.component
   styleUrls: ['./home.component.css']
 })
 
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit {
   guestId = null;
   guestData: IGuest = null;
   loading = true;
@@ -37,7 +37,25 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   }
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
+    // Add map controls
+    if (this.guestId) {
+      this.guestService.getGuestByID(this.guestId).subscribe(response => {
+        if (response) {
+          this.guestData = response;
+          this.loading = false;
+          const loader = this.renderer.selectRootElement('#loader');
+          this.renderer.setStyle(loader, 'display', 'none');
+          this.setMap();
+
+        } else {
+          this.router.navigateByUrl('/404');
+        }
+      });
+    }
+  }
+
+  setMap(): void {
     setTimeout(() => {
       mapboxgl.accessToken = 'pk.eyJ1IjoidHJtYm85MjEiLCJhIjoiY2tvNjJwdmRlMDdvbTJubnh4eDNibTViOCJ9.kBVtOIOT4vhtfHqcg6MSGg';
       this.map = new mapboxgl.Map({
@@ -47,35 +65,19 @@ export class HomeComponent implements OnInit, AfterViewInit {
         center: [this.lng, this.lat]
       });
 
+      this.map.addControl(new mapboxgl.NavigationControl());
+
       const popup = new mapboxgl.Popup()
         .setLngLat([this.lng, this.lat])
         .setHTML(`<h1>גן האירועים יארה, כביש קיסריה גן שמואל</h1>`);
 
-      const marker = new mapboxgl.Marker({
+      new mapboxgl.Marker({
         color: 'red',
         draggable: true
       }).setLngLat([this.lng, this.lat])
         .setPopup(popup)
         .addTo(this.map);
-
-      // Add map controls
-      this.map.addControl(new mapboxgl.NavigationControl());
-    }, 1000);
-  }
-
-  ngOnInit(): void {
-    if (this.guestId) {
-      this.guestService.getGuestByID(this.guestId).subscribe(response => {
-        if (response) {
-          this.guestData = response;
-          this.loading = false;
-          const loader = this.renderer.selectRootElement('#loader');
-          this.renderer.setStyle(loader, 'display', 'none');
-        } else {
-          this.router.navigateByUrl('/404');
-        }
-      });
-    }
+    }, 10);
   }
 
   handleAddGuest(): void {
@@ -146,11 +148,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     });
   }
 
-  validateForm(): boolean {
-    console.log(this.guestData);
-    return this.guestData?.amountOfGuests !== null && this.guestData?.willArrive !== null;
-  }
-
   handleCornerClick(): void {
     this.showImage = true;
     const modal = document.getElementById('myModal');
@@ -166,11 +163,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
     span.onclick = () => {
       modal.style.display = 'none';
       this.showImage = false;
+      this.setMap();
     };
 
     modal.onclick = () => {
       modal.style.display = 'none';
       this.showImage = false;
+      this.setMap();
     };
 
   }
