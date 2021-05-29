@@ -42,8 +42,7 @@
         </div>
         <div>
           <label>
-            <input readonly [value]="guestData?.amountOfGuests?.toString()" class="number-of-guests" matInput
-                   placeholder="-">
+            <input readonly [value]="guestData?.amountOfGuests?.toString() || '0'" class="number-of-guests" matInput>
           </label>
         </div>
         <div class="icon-size">

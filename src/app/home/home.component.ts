@@ -100,8 +100,18 @@ export class HomeComponent implements OnInit {
   }
 
   saveGuestData(): void {
+    if (!this.guestData.amountOfGuests && this.guestData.willArrive === 'yes') {
+      this.dialog.open(DialogMessageComponent, {
+        data: {
+          isValid: false,
+          message: 'אנא סמנו את כמות האורחים הצפויים להגיע ואשרו הגעה שנית.'
+        }
+      });
+      this.guestData.willArrive = null;
+      return;
+    }
     if (this.guestData.amountOfGuests === 0 && this.guestData.willArrive === 'yes') {
-      const dialogRef = this.dialog.open(DialogMessageComponent, {
+      this.dialog.open(DialogMessageComponent, {
         data: {
           isValid: false,
           message: 'סימנת שהינך מגיע לאירוע אך כמות האורחים שווה לאפס. אנא עדכן כמות האורחים המגיעים.'
@@ -111,7 +121,7 @@ export class HomeComponent implements OnInit {
       return;
     }
     if (this.guestData.amountOfGuests > 0 && this.guestData.willArrive === 'no') {
-      const dialogRef = this.dialog.open(DialogMessageComponent, {
+      this.dialog.open(DialogMessageComponent, {
         data: {
           isValid: false,
           message: 'סימנת שאינך מתכוון להגיע לאירוע אך כמות האורחים גדולה מאפס. במידה ואינך מתכוון להגיע, אנא סמן אפס בכמות האורחים ולחץ שוב על כפתור לא מגיע/ה.'
@@ -123,14 +133,14 @@ export class HomeComponent implements OnInit {
     this.guestService.updateGuestData(this.guestData).subscribe(response => {
       if (response) {
         if (this.guestData.willArrive === 'yes') {
-          const dialogRef = this.dialog.open(DialogMessageComponent, {
+          this.dialog.open(DialogMessageComponent, {
             data: {
               isValid: true,
               message: 'מתרגשים ומצפים לראותכם :)'
             }
           });
         } else {
-          const dialogRef = this.dialog.open(DialogMessageComponent, {
+          this.dialog.open(DialogMessageComponent, {
             data: {isValid: true}
           });
         }
