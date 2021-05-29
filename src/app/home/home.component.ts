@@ -43,10 +43,10 @@ export class HomeComponent implements OnInit {
       this.guestService.getGuestByID(this.guestId).subscribe(response => {
         if (response) {
           this.guestData = response;
+          this.setMap();
           this.loading = false;
           const loader = this.renderer.selectRootElement('#loader');
           this.renderer.setStyle(loader, 'display', 'none');
-          this.setMap();
           this.increaseVisits();
         } else {
           this.router.navigateByUrl('/404');
