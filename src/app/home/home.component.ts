@@ -19,8 +19,8 @@ export class HomeComponent implements OnInit {
   loading = true;
   // lat = 32.4446032;
   // lng = 34.9358856;
-  lat = 32.49002749560901;
-  lng = 34.94987813509994;
+  lat = 32.48945826707851;
+  lng = 34.94796574006896;
   showImage = false;
 
   @ViewChild('mapElement') public mapElement: ElementRef;
