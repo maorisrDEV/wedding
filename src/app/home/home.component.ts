@@ -17,8 +17,10 @@ export class HomeComponent implements OnInit {
   guestId = null;
   guestData: IGuest = null;
   loading = true;
-  lat = 32.4446032;
-  lng = 34.9358856;
+  // lat = 32.4446032;
+  // lng = 34.9358856;
+  lat = 32.49002749560901;
+  lng = 34.94987813509994;
   showImage = false;
 
   @ViewChild('mapElement') public mapElement: ElementRef;
@@ -67,7 +69,7 @@ export class HomeComponent implements OnInit {
 
       const popup = new mapboxgl.Popup()
         .setLngLat([this.lng, this.lat])
-        .setHTML(`<h1>גן האירועים יארה, כביש קיסריה גן שמואל</h1>`);
+        .setHTML(`<h1>גן האירועים טרה, החרש 19, קיסריה</h1>`);
 
       new mapboxgl.Marker({
         color: 'red',
