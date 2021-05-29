@@ -55,6 +55,7 @@ agm-map {
 .cal-link {
   margin-right: 10px;
   text-decoration: none !important;
+  padding: 0 0 0 8px;
 }
 
 .selected {
