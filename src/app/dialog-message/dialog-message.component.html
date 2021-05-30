@@ -1,21 +1,35 @@
-<div *ngIf="data?.isValid === true" dir="rtl">
-  <h1 mat-dialog-title>סטטוס ההגעה עודכן בהצלחה.</h1>
+<div *ngIf="data?.status === STATUS.arrivingOK || data?.status === STATUS.notArrivingOK" dir="rtl">
+  <h1 mat-dialog-title>סטטוס ההגעה עודכן בהצלחה</h1>
   <div mat-dialog-content>
-    <h2>{{data.message}}</h2>
-    <b><u>שימו לב:</u></b>
-    <h3>ניתן לעדכן את סטטוס ההגעה בכל עת.</h3>
+    <h3>{{data.message}}</h3>
+    <h3><b>שימו לב:</b>
+      <br>
+      <h3>ניתן לעדכן את סטטוס ההגעה בכל עת.</h3>
+    </h3>
   </div>
   <div mat-dialog-actions>
-    <button style="margin: auto" mat-button (click)="onNoClick()">סגירה</button>
+    <button style="margin: auto" mat-button (click)="onClick()">סגירה</button>
   </div>
 </div>
 
-<div *ngIf="data?.isValid === false" dir="rtl">
-  <h1 mat-dialog-title><b><u>שגיאה:</u></b></h1>
+<div *ngIf="data?.status === STATUS.noGuestsNumberAndYes" dir="rtl">
+  <h1 mat-dialog-title><b>אופס, זיהינו אי תאימות</b></h1>
   <div mat-dialog-content>
     <h2>{{data.message}}</h2>
   </div>
   <div mat-dialog-actions>
-    <button style="margin: auto" mat-button (click)="onNoClick()">סגירה</button>
+    <button style="margin: auto" mat-button (click)="onClick()">סגירה</button>
   </div>
 </div>
+
+<div *ngIf="data?.status === STATUS.notArrivingAndMoreThenZeroGuest" dir="rtl">
+  <h1 mat-dialog-title><b>אופס, זיהינו אי תאימות</b></h1>
+  <div mat-dialog-content>
+    <h2>{{data.message}}</h2>
+  </div>
+  <div mat-dialog-actions>
+    <button style="margin: auto" mat-button (click)="onYesNoClick(true)">כן, אני לא מגיע/ה</button>
+    <button style="margin: auto" mat-button (click)="onYesNoClick(false)">לא, תן לי לתקן</button>
+  </div>
+</div>
+

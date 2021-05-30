@@ -3,9 +3,8 @@ import {GuestsService} from '../services/guests.service';
 import {IGuest} from '../../interfaces/interfaces';
 import {ActivatedRoute, Router} from '@angular/router';
 import * as mapboxgl from 'mapbox-gl';
-import set = Reflect.set;
 import {MatDialog} from '@angular/material/dialog';
-import {DialogMessageComponent} from '../dialog-message/dialog-message.component';
+import {DialogMessageComponent, STATUS} from '../dialog-message/dialog-message.component';
 
 @Component({
   selector: 'app-home',
@@ -100,52 +99,76 @@ export class HomeComponent implements OnInit {
   }
 
   saveGuestData(): void {
-    if (!this.guestData.amountOfGuests && this.guestData.willArrive === 'yes') {
+    let valid = true;
+    if ((this.guestData.amountOfGuests === 0 || !this.guestData.amountOfGuests) && this.guestData.willArrive === 'yes') {
+      valid = false;
       this.dialog.open(DialogMessageComponent, {
         data: {
-          isValid: false,
-          message: 'אנא סמנו את כמות האורחים הצפויים להגיע ואשרו הגעה שנית.'
-        }
-      });
-      this.guestData.willArrive = null;
-      return;
-    }
-    if (this.guestData.amountOfGuests === 0 && this.guestData.willArrive === 'yes') {
-      this.dialog.open(DialogMessageComponent, {
-        data: {
-          isValid: false,
-          message: 'סימנת שהינך מגיע לאירוע אך כמות האורחים שווה לאפס. אנא עדכן כמות האורחים המגיעים.'
+          status: STATUS.noGuestsNumberAndYes,
+          message: 'סימנת שהינך מגיע לאירוע אך כמות האורחים שווה לאפס. אנא עדכן כמות האורחים המגיעים ולחץ על כפתור מגיע/ה שנית. תודה :)'
         }
       });
       this.guestData.willArrive = null;
       return;
     }
     if (this.guestData.amountOfGuests > 0 && this.guestData.willArrive === 'no') {
-      this.dialog.open(DialogMessageComponent, {
+      valid = false;
+      const dialog = this.dialog.open(DialogMessageComponent, {
         data: {
-          isValid: false,
-          message: 'סימנת שאינך מתכוון להגיע לאירוע אך כמות האורחים גדולה מאפס. במידה ואינך מתכוון להגיע, אנא סמן אפס בכמות האורחים ולחץ שוב על כפתור לא מגיע/ה.'
+          status: STATUS.notArrivingAndMoreThenZeroGuest,
+          message: `סימנת ש-${this.guestData.amountOfGuests} אורחים מגיעים אך בכל זאת סימנת שאתה לא מתכוון להגיע. האם להתעלם מכמות האורחים שמגיעים?`
         }
       });
-      this.guestData.willArrive = null;
-      return;
-    }
-    this.guestService.updateGuestData(this.guestData).subscribe(response => {
-      if (response) {
-        if (this.guestData.willArrive === 'yes') {
-          this.dialog.open(DialogMessageComponent, {
-            data: {
-              isValid: true,
-              message: 'מתרגשים ומצפים לראותכם :)'
+      dialog.afterClosed().subscribe(res => {
+        if (res === true) {
+          this.guestData.amountOfGuests = 0;
+          this.guestService.updateGuestData(this.guestData).subscribe(response => {
+            if (response) {
+              if (this.guestData.willArrive === 'yes') {
+                this.dialog.open(DialogMessageComponent, {
+                  data: {
+                    status: STATUS.arrivingOK,
+                    message: 'מתרגשים ומצפים לראותכם :)'
+                  }
+                });
+              } else {
+                this.dialog.open(DialogMessageComponent, {
+                  data: {
+                    message: 'סימנו שאינך מתכוון להגיע לאירוע.',
+                    status: STATUS.notArrivingOK
+                  }
+                });
+              }
             }
           });
-        } else {
-          this.dialog.open(DialogMessageComponent, {
-            data: {isValid: true}
-          });
         }
-      }
-    });
+      });
+    }
+
+
+    if (valid) {
+      this.guestService.updateGuestData(this.guestData).subscribe(response => {
+        if (response) {
+          if (this.guestData.willArrive === 'yes') {
+            this.dialog.open(DialogMessageComponent, {
+              data: {
+                status: STATUS.arrivingOK,
+                message: 'מתרגשים ומצפים לראותכם :)'
+              }
+            });
+          } else {
+            this.dialog.open(DialogMessageComponent, {
+              data: {
+                message: 'סימנו שאינך מתכוון להגיע לאירוע.',
+                status: STATUS.notArrivingOK
+              }
+            });
+          }
+        }
+      });
+    }
+
+
   }
 
   messageTextChanged($event: any): void {

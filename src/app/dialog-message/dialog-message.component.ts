@@ -1,7 +1,12 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
-class DialogData {
+export enum STATUS {
+  noGuestsNumberAndYes,
+  notArrivingAndMoreThenZeroGuest,
+  arrivingOK,
+  notArrivingOK
+
 }
 
 @Component({
@@ -10,16 +15,21 @@ class DialogData {
   styleUrls: ['./dialog-message.component.css']
 })
 export class DialogMessageComponent implements OnInit {
+  STATUS = STATUS;
 
   constructor(
     public dialogRef: MatDialogRef<DialogMessageComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+    @Inject(MAT_DIALOG_DATA) public data: {status: STATUS, message: any}) {
   }
 
   ngOnInit(): void {
   }
 
-  onNoClick(): void {
+  onClick(): void {
     this.dialogRef.close();
+  }
+
+  onYesNoClick(answer: boolean): void {
+    this.dialogRef.close(answer);
   }
 }
