@@ -147,6 +147,9 @@ export class HomeComponent implements OnInit {
 
 
     if (valid) {
+      if (this.guestData.willArrive === 'no') {
+        this.guestData.amountOfGuests = 0;
+      }
       this.guestService.updateGuestData(this.guestData).subscribe(response => {
         if (response) {
           if (this.guestData.willArrive === 'yes') {
